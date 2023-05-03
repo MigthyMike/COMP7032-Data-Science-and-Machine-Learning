@@ -244,8 +244,8 @@ def create_rf(max_depth, min_samples_split, min_samples_leaf, max_features, boot
 if __name__ == "__main__":
     # print("Accuracy Score vanila: 0.9128876636802206 rmse without column selection is: 0.2951479905399653")
 
-    # rf_vanilla()
-    # rf_without_selected_column()
+    rf_vanilla()
+    rf_without_selected_column()
     final_rf()
 
     # importance_features()

@@ -1,15 +1,14 @@
 from math import sqrt
 
 import pandas as pd
+from sklearn.ensemble import BaggingClassifier
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import BaggingClassifier
 
 
 def knn_1():
@@ -24,7 +23,7 @@ def knn_1():
     datas = pd.get_dummies(datas, columns=["room_type_reserved"])
 
     datas = pd.get_dummies(datas, columns=["market_segment_type"])
-    X = datas.drop('booking_status', axis=1)  # Replace 'label_column' with the name of your label column
+    X = datas.drop('booking_status', axis=1)
     y = datas['booking_status']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=4393)
@@ -32,7 +31,7 @@ def knn_1():
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    k = 5  # Replace with the number of neighbors you want to use
+    k = 5
     knn = KNeighborsClassifier(n_neighbors=k)
     knn.fit(X_train, y_train)
 
@@ -59,7 +58,7 @@ def knn_2():
 
     datas = pd.get_dummies(datas, columns=["market_segment_type"])
 
-    X = datas.drop('booking_status', axis=1)  # Replace 'label_column' with the name of your label column
+    X = datas.drop('booking_status', axis=1)  
     y = datas['booking_status']
 
     lead_time = datas['lead_time']
@@ -71,7 +70,7 @@ def knn_2():
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    k = 7  # Replace with the number of neighbors you want to use
+    k = 7
     knn = KNeighborsClassifier(n_neighbors=k)
     knn.fit(X_train, y_train)
 
@@ -197,9 +196,6 @@ def knn_vanilla():
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=987987)
 
-    # scaler = StandardScaler()
-    # X_train = scaler.fit_transform(X_train)
-    # X_test = scaler.transform(X_test)
     knn_model = KNeighborsClassifier()
 
     knn_model.fit(X_train, y_train)
@@ -220,5 +216,5 @@ def knn_vanilla():
 
 
 if __name__ == "__main__":
-    # knn_vanilla()
+    knn_vanilla()
     knn_3()

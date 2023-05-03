@@ -92,21 +92,20 @@ def pca():
     f1 = f1_score(y_test, y_pred, average='weighted')
     print(f"f1 is {f1:.4f}")
 
+    bagging_model = BaggingClassifier(knn_model, n_estimators=11, max_features=5, random_state=3920)
 
-    # bagging_model = BaggingClassifier(knn_model, n_estimators=11, max_features=5, random_state=3920)
-    #
-    # bagging_model.fit(X_train, y_train)
-    #
-    # y_pred_bagging = bagging_model.predict(X_test)
-    # accuracy_bagging = accuracy_score(y_test, y_pred_bagging)
-    # print(f"Accuracy with bagging: {accuracy_bagging:.4f}")
-    #
-    # test_mse = mean_squared_error(y_test, y_pred_bagging)
-    # test_rmse = sqrt(test_mse)
-    # print(f"rmse with bagging: {test_rmse:.4f}")
-    #
-    # f1 = f1_score(y_test, y_pred_bagging, average='weighted')
-    # print(f"f1 is {f1:.4f}")
+    bagging_model.fit(X_train, y_train)
+
+    y_pred_bagging = bagging_model.predict(X_test)
+    accuracy_bagging = accuracy_score(y_test, y_pred_bagging)
+    print(f"Accuracy with bagging: {accuracy_bagging:.4f}")
+
+    test_mse = mean_squared_error(y_test, y_pred_bagging)
+    test_rmse = sqrt(test_mse)
+    print(f"rmse with bagging: {test_rmse:.4f}")
+
+    f1 = f1_score(y_test, y_pred_bagging, average='weighted')
+    print(f"f1 is {f1:.4f}")
 
 
 def pca_pipeline():
@@ -146,10 +145,8 @@ def pca_pipeline():
                                      metric="manhattan"))
     ])
 
-    # Train the pipeline (preprocessing, PCA, and kNN)
     pipeline.fit(X_train, y_train)
 
-    # Evaluate the model
     accuracy = pipeline.score(X_test, y_test)
     print(f'Accuracy: {accuracy:.4f}')
 
